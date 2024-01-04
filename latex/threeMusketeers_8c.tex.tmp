@@ -1,0 +1,315 @@
+\hypertarget{threeMusketeers_8c}{}\doxysection{three\+Musketeers.\+c File Reference}
+\label{threeMusketeers_8c}\index{threeMusketeers.c@{threeMusketeers.c}}
+
+
+This program implements the game three Musketeers by creating a board and reading the inputs from a file of the user\textquotesingle{}s choice. Once the game starts the user is asked to insert their move starting off by the three Musketeers. The game continuous until there is a winner, either by the enemies/\+Cardinal Richelieu\textquotesingle{}s men, or the three Musketeers. The game can be interrupted manually but the board always gets saved in another file, in case the user wants to restart the same game next time.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+Include dependency graph for three\+Musketeers.\+c\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{threeMusketeers_8c_a0240ac851181b84ac374872dc5434ee4}\label{threeMusketeers_8c_a0240ac851181b84ac374872dc5434ee4}} 
+\#define {\bfseries N}~5
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{threeMusketeers_8c_a5ea2661596c29cffcf45844284c00a04}{read\+Board}} (char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]}, char filename\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Reads the contents of a specified file and uses it to initialize the game board represented as a 2D character array. It checks the validity of the input and ensures the proper dimensions of the board. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{threeMusketeers_8c_a1179fcf8bf7ddbaa01df9af1bbd28812}{write\+Board}} (char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]}, char filename\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Writes and saves the current game state, represented by the 2D array, to the specified file. It creates a text file containing the board layout and allows you to save your progress and continue the game later. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{threeMusketeers_8c_aed2179516166ace389c61f96e3271764}{display\+\_\+board}} (char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em Prints the current state of the game board to the console, providing a visual representation of the game board to the players. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{threeMusketeers_8c_a2f86407f4854832132fe1e3e42ad2e5e}{play}} (char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]}, char outfile\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em This function basically initiates and controlls the game. It takes user input for moves and keeps going in a loop until someone from either teams has won. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{threeMusketeers_8c_af146a280b2485e29a88e1c1b93ff0a9e}{is\+Valid\+Move}} (int row, int col, char direction, char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em Checks and validates whether a move is within the boundaries of the game board in general and follows a valid direction (L/l, R/r, U/u, D/d). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{threeMusketeers_8c_ad7494dde6320c20bd53264e95ec8da0e}{is\+Valid\+Musketeer\+Move}} (int row, int col, char direction, char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em This function specifically validates moves for the Musketeer player, ensuring that they only move in valid directions and that there is a Musketeer there at all. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{threeMusketeers_8c_a18b69dca267e3f08e797ba0ea3cbf0c0}{is\+Valid\+Enemy\+Move}} (int row, int col, char direction, char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em This function specifically validates moves for the enemies player, ensuring that they only move in valid directions and that there are enemies in the specific moves they ask for. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{threeMusketeers_8c_a50ed5af784f9da56ef7c7bdff9f22a9b}{make\+Move}} (int row, int col, char direction, char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]}, int m\+Turn)
+\begin{DoxyCompactList}\small\item\em This function applies a valid move to the game board based on the coordinates and direction as well as whose turn it is (Musketeer or enemy). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{threeMusketeers_8c_a3f2d63eeadf0c73f6d4f660cb5f026fc}{game\+Interrupt}} (char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]}, char outfile\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em This function is called when the user inputs a specific command to interrupt the game. It saves the current game state to a file by calling the write\+Board function, for later resumption. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{threeMusketeers_8c_ae471d256d2379527c504ef63a0a66159}{win\+Game}} (char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em determines the game\textquotesingle{}s outcome by checking if either the Musketeers or the enemies have won the game based on the current game board. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{threeMusketeers_8c_a259d310c7a20792ed1f0a887642d918a}{win\+Musketeers}} (char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em checks for victory conditions for the Musketeer team, ensuring that the enemies cannot capture all Musketeers, based on the current game board. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{threeMusketeers_8c_aa970c56be3e6c191c2914b1ed2ead42c}{win\+Enemies}} (char board\mbox{[}$\,$\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em This function checks for victory conditions for the enemy team, such as having all three Musketeers in the same row or column, based on the current game board. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{threeMusketeers_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em reads the user file input and proceeds to play the game while doing the appropriate checks for errors \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This program implements the game three Musketeers by creating a board and reading the inputs from a file of the user\textquotesingle{}s choice. Once the game starts the user is asked to insert their move starting off by the three Musketeers. The game continuous until there is a winner, either by the enemies/\+Cardinal Richelieu\textquotesingle{}s men, or the three Musketeers. The game can be interrupted manually but the board always gets saved in another file, in case the user wants to restart the same game next time. 
+
+\begin{DoxyAuthor}{Author}
+Maria Chrysanthou iD\+: 1123114 
+\end{DoxyAuthor}
+\begin{DoxyRefDesc}{Bug}
+\item[\mbox{\hyperlink{bug__bug000001}{Bug}}]no known bugs\end{DoxyRefDesc}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{threeMusketeers_8c_aed2179516166ace389c61f96e3271764}\label{threeMusketeers_8c_aed2179516166ace389c61f96e3271764}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!display\_board@{display\_board}}
+\index{display\_board@{display\_board}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{display\_board()}{display\_board()}}
+{\footnotesize\ttfamily void display\+\_\+board (\begin{DoxyParamCaption}\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Prints the current state of the game board to the console, providing a visual representation of the game board to the players. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{threeMusketeers_8c_a3f2d63eeadf0c73f6d4f660cb5f026fc}\label{threeMusketeers_8c_a3f2d63eeadf0c73f6d4f660cb5f026fc}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!gameInterrupt@{gameInterrupt}}
+\index{gameInterrupt@{gameInterrupt}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{gameInterrupt()}{gameInterrupt()}}
+{\footnotesize\ttfamily void game\+Interrupt (\begin{DoxyParamCaption}\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{char}]{outfile\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+This function is called when the user inputs a specific command to interrupt the game. It saves the current game state to a file by calling the write\+Board function, for later resumption. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{threeMusketeers_8c_a18b69dca267e3f08e797ba0ea3cbf0c0}\label{threeMusketeers_8c_a18b69dca267e3f08e797ba0ea3cbf0c0}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!isValidEnemyMove@{isValidEnemyMove}}
+\index{isValidEnemyMove@{isValidEnemyMove}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{isValidEnemyMove()}{isValidEnemyMove()}}
+{\footnotesize\ttfamily int is\+Valid\+Enemy\+Move (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{col,  }\item[{char}]{direction,  }\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+This function specifically validates moves for the enemies player, ensuring that they only move in valid directions and that there are enemies in the specific moves they ask for. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The row where the move is initiated. \\
+\hline
+{\em col} & The column where the move is initiated. \\
+\hline
+{\em direction} & The direction of the move (L/l, R/r, U/u, D/d). \\
+\hline
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the move is valid for an enemy, 0 if it is not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{threeMusketeers_8c_af146a280b2485e29a88e1c1b93ff0a9e}\label{threeMusketeers_8c_af146a280b2485e29a88e1c1b93ff0a9e}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!isValidMove@{isValidMove}}
+\index{isValidMove@{isValidMove}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{isValidMove()}{isValidMove()}}
+{\footnotesize\ttfamily int is\+Valid\+Move (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{col,  }\item[{char}]{direction,  }\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Checks and validates whether a move is within the boundaries of the game board in general and follows a valid direction (L/l, R/r, U/u, D/d). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The row where the move is initiated. \\
+\hline
+{\em col} & The column where the move is initiated. \\
+\hline
+{\em direction} & The direction of the move (L/l, R/r, U/u, D/d). \\
+\hline
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the move is valid, 0 if it is not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{threeMusketeers_8c_ad7494dde6320c20bd53264e95ec8da0e}\label{threeMusketeers_8c_ad7494dde6320c20bd53264e95ec8da0e}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!isValidMusketeerMove@{isValidMusketeerMove}}
+\index{isValidMusketeerMove@{isValidMusketeerMove}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{isValidMusketeerMove()}{isValidMusketeerMove()}}
+{\footnotesize\ttfamily int is\+Valid\+Musketeer\+Move (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{col,  }\item[{char}]{direction,  }\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+This function specifically validates moves for the Musketeer player, ensuring that they only move in valid directions and that there is a Musketeer there at all. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The row where the move is initiated. \\
+\hline
+{\em col} & The column where the move is initiated. \\
+\hline
+{\em direction} & The direction of the move (L/l, R/r, U/u, D/d). \\
+\hline
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the move is valid for a Musketeer, 0 if it is not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{threeMusketeers_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{threeMusketeers_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!main@{main}}
+\index{main@{main}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+reads the user file input and proceeds to play the game while doing the appropriate checks for errors 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & \\
+\hline
+{\em argv} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the program is done running 
+\end{DoxyReturn}
+\mbox{\Hypertarget{threeMusketeers_8c_a50ed5af784f9da56ef7c7bdff9f22a9b}\label{threeMusketeers_8c_a50ed5af784f9da56ef7c7bdff9f22a9b}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!makeMove@{makeMove}}
+\index{makeMove@{makeMove}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{makeMove()}{makeMove()}}
+{\footnotesize\ttfamily void make\+Move (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{col,  }\item[{char}]{direction,  }\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{m\+Turn }\end{DoxyParamCaption})}
+
+
+
+This function applies a valid move to the game board based on the coordinates and direction as well as whose turn it is (Musketeer or enemy). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The row where the move is initiated. \\
+\hline
+{\em col} & The column where the move is initiated. \\
+\hline
+{\em direction} & The direction of the move (L/l, R/r, U/u, D/d). \\
+\hline
+{\em board} & the 2D array representing the game board. \\
+\hline
+{\em m\+Turn} & A flag indicating whose turn it is (1 for Musketeers, 0 for enemies). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{threeMusketeers_8c_a2f86407f4854832132fe1e3e42ad2e5e}\label{threeMusketeers_8c_a2f86407f4854832132fe1e3e42ad2e5e}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!play@{play}}
+\index{play@{play}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily void play (\begin{DoxyParamCaption}\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{char}]{outfile\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+This function basically initiates and controlls the game. It takes user input for moves and keeps going in a loop until someone from either teams has won. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{threeMusketeers_8c_a5ea2661596c29cffcf45844284c00a04}\label{threeMusketeers_8c_a5ea2661596c29cffcf45844284c00a04}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!readBoard@{readBoard}}
+\index{readBoard@{readBoard}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{readBoard()}{readBoard()}}
+{\footnotesize\ttfamily int read\+Board (\begin{DoxyParamCaption}\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{char}]{filename\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Reads the contents of a specified file and uses it to initialize the game board represented as a 2D character array. It checks the validity of the input and ensures the proper dimensions of the board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & the 2D array representing the game board. \\
+\hline
+{\em filename} & the name of the file from which to read the game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if reading the board works successfully, 0 if it fails. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{threeMusketeers_8c_aa970c56be3e6c191c2914b1ed2ead42c}\label{threeMusketeers_8c_aa970c56be3e6c191c2914b1ed2ead42c}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!winEnemies@{winEnemies}}
+\index{winEnemies@{winEnemies}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{winEnemies()}{winEnemies()}}
+{\footnotesize\ttfamily int win\+Enemies (\begin{DoxyParamCaption}\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+This function checks for victory conditions for the enemy team, such as having all three Musketeers in the same row or column, based on the current game board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the enemies have won, 0 if they have not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{threeMusketeers_8c_ae471d256d2379527c504ef63a0a66159}\label{threeMusketeers_8c_ae471d256d2379527c504ef63a0a66159}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!winGame@{winGame}}
+\index{winGame@{winGame}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{winGame()}{winGame()}}
+{\footnotesize\ttfamily int win\+Game (\begin{DoxyParamCaption}\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+determines the game\textquotesingle{}s outcome by checking if either the Musketeers or the enemies have won the game based on the current game board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if any opposing team has won, 0 if none have won. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{threeMusketeers_8c_a259d310c7a20792ed1f0a887642d918a}\label{threeMusketeers_8c_a259d310c7a20792ed1f0a887642d918a}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!winMusketeers@{winMusketeers}}
+\index{winMusketeers@{winMusketeers}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{winMusketeers()}{winMusketeers()}}
+{\footnotesize\ttfamily int win\+Musketeers (\begin{DoxyParamCaption}\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+checks for victory conditions for the Musketeer team, ensuring that the enemies cannot capture all Musketeers, based on the current game board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & the 2D array representing the game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the Musketeers have won, 0 if they have not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{threeMusketeers_8c_a1179fcf8bf7ddbaa01df9af1bbd28812}\label{threeMusketeers_8c_a1179fcf8bf7ddbaa01df9af1bbd28812}} 
+\index{threeMusketeers.c@{threeMusketeers.c}!writeBoard@{writeBoard}}
+\index{writeBoard@{writeBoard}!threeMusketeers.c@{threeMusketeers.c}}
+\doxysubsubsection{\texorpdfstring{writeBoard()}{writeBoard()}}
+{\footnotesize\ttfamily int write\+Board (\begin{DoxyParamCaption}\item[{char}]{board\mbox{[}$\,$\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{char}]{filename\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Writes and saves the current game state, represented by the 2D array, to the specified file. It creates a text file containing the board layout and allows you to save your progress and continue the game later. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & the 2D array representing the game board. \\
+\hline
+{\em filename} & the name of the file from which to write the game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if writing the board works successfully, 0 if it fails. 
+\end{DoxyReturn}
