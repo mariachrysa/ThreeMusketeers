@@ -5,7 +5,7 @@
  * the three Musketeers. The game continuous until there is a winner, either by the enemies/Cardinal Richelieu's 
  * men, or the three Musketeers. The game can be interrupted manually but the board always gets saved in
  * another file, in case the user wants to restart the same game next time.
- * @author Maria Chrysanthou iD: 1123114
+ * @author Maria Chrysanthou
  * @bug no known bugs
  * 
 */
