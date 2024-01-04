@@ -1,4 +1,4 @@
-@author Maria Chrysanthou   ID: 1123114
+@author Maria Chrysanthou 
 
 This is the game of the Three Musketeers.
 
